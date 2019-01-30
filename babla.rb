@@ -15,9 +15,9 @@ class BablaTranslator
 
     def perform_get_request(word)
         @last_request_word_not_found = false        
-        res = Net::HTTP.get_response(URI(@BABLA_URL_EN + word))
+        res = Net::HTTP.get_response(URI(@BABLA_URL_EN + URI.escape(word)))
         if res.is_a? Net::HTTPMovedPermanently
-            res = Net::HTTP.get_response(URI(@BABLA_URL_PL + word))            
+            res = Net::HTTP.get_response(URI(@BABLA_URL_PL + URI.escape(word)))            
         end
         res.body
     end
